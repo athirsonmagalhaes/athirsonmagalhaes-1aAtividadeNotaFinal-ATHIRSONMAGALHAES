@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 50px;
+      }
+      main {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.329);
+        width: 350px;
+      }
+
+      h1 {
+        font-size: 23px;
+        color: rgb(255, 49, 49);
+      }
+      .inputs {
+        margin-bottom: 15px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #cc6928;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #864f29;
+      }
+      p {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 16px;
+      }
+    </style>
+
+    <title>Página de Contato com Validação</title>
+  </head>
+  <body>
+    <main>
+      <h1>Formulário de Contato</h1>
+      <form id="contact-form">
+        <div class="inputs">
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            placeholder="Nome"
+            required
+          />
+        </div>
+        <div class="inputs">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="inputs">
+          <textarea
+            id="mensagem"
+            name="mensagem"
+            rows="4"
+            placeholder="Sua mensagem..."
+            required
+          ></textarea>
+        </div>
+        <button type="submit" onclick="enviar()">Enviar</button>
+      </form>
+      <p id="sua-mensagem"></p>
+      <script>
+        document
+          .getElementById("contact-form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const email = document.getElementById("email").value;
+            const mensagem = document.getElementById("mensagem").value;
+
+            const emailPattern =
+              /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+              showMessage("Por favor, insira um email válido.", "error");
+              return;
+            }
+            showMessage("Formulário enviado com sucesso!", "success");
+            document.getElementById("contact-form").reset();
+          });
+
+        function showMessage(message, type) {
+          const messageContainer = document.getElementById("sua-mensagem");
+          messageContainer.textContent = message;
+        }
+      </script>
+    </main>
+  </body>
+</html>
